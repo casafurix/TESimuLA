@@ -11,11 +11,13 @@ class Car {
     this.friction = 0.05;
     this.angle = 0;
 
+    this.sensor = new Sensor(this);
     this.controls = new Controls();
   }
 
-  update() {
+  update(roadBorders) {
     this.#move();
+    this.sensor.update(roadBorders);
   }
 
   //private method
@@ -80,5 +82,7 @@ class Car {
     ctx.fill();
     //otherwise we would be translating and rotating on each frame of the animation
     ctx.restore();
+
+    this.sensor.draw(ctx);
   }
 }
