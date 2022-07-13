@@ -1,4 +1,5 @@
 class Sensor {
+  //car parameter, as sensor will be attached to car
   constructor(car) {
     this.car = car;
     this.rayCount = 5;
@@ -37,6 +38,7 @@ class Sensor {
     } else {
       const offsets = touches.map((e) => e.offset);
       //... -> spreads the array of offset values into many individual values
+      // we are trying to find the minimum offset, to find the closest obstacle (roadBorder/vehicle) to the car
       const minOffset = Math.min(...offsets);
       return touches.find((e) => e.offset == minOffset);
     }
@@ -62,7 +64,9 @@ class Sensor {
   }
   draw(ctx) {
     for (let i = 0; i < this.rayCount; i++) {
+      //end point of ray
       let end = this.rays[i][1];
+      //if there is some intersection, we take it as a reading
       if (this.readings[i]) {
         end = this.readings[i];
       }
@@ -74,6 +78,7 @@ class Sensor {
       ctx.lineTo(end.x, end.y);
       ctx.stroke();
 
+      //drawing the black ray extension to see till where and how the line segment would have continued if the borders weren't present
       ctx.beginPath();
       ctx.lineWidth = 2.5;
       ctx.strokeStyle = "black";
