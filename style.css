@@ -4,7 +4,10 @@ body{
     overflow: hidden;
     text-align: center;
 }
+#networkCanvas{
+    background: black;
+}
 
-#myCanvas{
+#carCanvas{
     background: lightgray;
 }
