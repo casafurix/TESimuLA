@@ -37,3 +37,13 @@ function polysIntersect(poly1, poly2) {
   }
   return false;
 }
+
+function getRGBA(value) {
+  //setting high transparency for lower weight values (less in magnitude), and vice-versa!
+  const alpha = Math.abs(value);
+  //setting different colors for positive and negative weights; yellow -> negative; blue -> postive!
+  const R = value < 0 ? 0 : 255;
+  const G = R;
+  const B = value > 0 ? 0 : 255;
+  return "rgba(" + R + ", " + G + ", " + B + ", " + alpha + ")";
+}
